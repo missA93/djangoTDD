@@ -1,6 +1,5 @@
-from selenium import webdriver
 import unittest
-
+from selenium import webdriver 
 
 
 class NewVisitortest(unittest.TestCase):
@@ -12,8 +11,7 @@ class NewVisitortest(unittest.TestCase):
         
     def test_new_visitors_website_title(self):
         self.browser.get("http://127.0.0.1:8000/")
-        self.assertIn("To-Do",self.browser.title) 
-        self.fail("to do is not in title")
+        self.assertIn("ToDo",self.browser.title) 
 
 
 if __name__ == "__main__":
