@@ -3,30 +3,54 @@
     <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     </head>
-    <title >ToDo lists
+    <title>ToDo lists
 
     </title>
 
     <body>
-        <div class="container">
+        {% verbatim %}
+        <div class="container" id='app'>
             <h1 class="title is-4">To-Do lists
-
+                {{message}}
             </h1>
-            <input class="input" id="to_do_text" placeholder="Enter a to-do item">
+            <input v-model='message' class="input" id="to_do_text" placeholder="Enter a to-do item"
+                @keyup.enter="addtodo">
+
             </input>
             <table id="todo_table" class="table is-bordered mt-3">
+
                 <tr>
                     <th>todo lists</th>
                 </tr>
-                <tr>
 
-                <tr>
-                    <td>1: Buy peacock feathers"</td>
-                </tr>
-                <td>add</td>
+                <tr v-for="(item,index) in todolist">
+                    <td>{{(index+1)+ ': '+item}}</td>
                 </tr>
             </table>
         </div>
+        {% endverbatim %}
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script type="module">
+            import { createApp, ref, reactive } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+            createApp({
+                setup() {
+                    const message = ref('')
+                    const todolist = reactive([])
+                    function addtodo() {
+                        todolist.push(message.value)
+                        message.value = ''
+                    }
+                    return {
+                        message,
+                        todolist,
+                        addtodo
+
+
+                    }
+                }
+            }).mount('#app')
+
+        </script>
     </body>
 
 </html>
